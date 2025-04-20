@@ -7,7 +7,14 @@
 #include <string.h>
 #include <time.h>
 
+#ifdef __linux__
 #include <unistd.h>
+#endif
+
+#ifdef _WIN32
+#include <Windows.h>
+#endif 
+
 #include <limits.h>
 
 #define KEYQUEUE_SIZE 16
@@ -40,7 +47,7 @@ extern "C" {
     }
 
     void DG_SleepMs(uint32_t ms) {
-        
+        // Do nothing to prevent the process from adding unexpected synchronization.
     }
 
     uint32_t DG_GetTicksMs() {
@@ -74,9 +81,9 @@ extern "C" {
 
     DLLEXPORT void DoomDLL_Initialize(uint8_t *rdram, recomp_context *ctx) {
 #ifdef _WIN32
-        if (!GetModuleFileNameA(NULL, s_WadPath, sizeof(s_WadPath))) {
-            return;
-        }
+        HMODULE hm = NULL;
+        GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)&DoomDLL_Initialize, &hm);
+        GetModuleFileNameA(hm, s_WadPath, sizeof(s_WadPath));
 #else
         ssize_t len = readlink("/proc/self/exe", s_WadPath, sizeof(s_WadPath) - 1);
         if (len == -1) {
