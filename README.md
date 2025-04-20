@@ -22,6 +22,7 @@ The game is played inside a desktop PC placed in the game world itself.
 
 - Install the mod using the [latest release](https://github.com/DarioSamo/MMRecompDoomMod/releases/latest).
 - Before running the mod, you must have a a `DOOM1.wad` file next to the dynamic library (`doomgeneric.dll` or others) file in the mods.
+  - If you don't own DOOM, you can just use the shareware version which is freely available online.
 - Once you're in-game, you can just press `L + R` at any time and Link will spawn a desk and start playing DOOM. Press this combination again to stop playing.
 
 ## How to build
