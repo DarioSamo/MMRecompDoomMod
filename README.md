@@ -6,7 +6,7 @@ This mod was very much made in jest and is mostly just intended as a proof of co
 
 Expect plenty of bugs, softlocks and other buggy interactions if you mess around with it.
 
-Platforms other than Windows aren't supported at the moment but it shouldn't be too hard to add if somebody's willing to add them.
+Platforms other than Windows and Linux aren't supported at the moment but it shouldn't be too hard to add if somebody's willing to add them.
 
 ## What is this?
 
@@ -32,4 +32,4 @@ Instructions on how to build each component of the mod can be found in each of t
 ## Special thanks
 
 - [Wiseguy](https://github.com/Mr-Wiseguy) for providing general code assistance and material tweaking.
-- [Reonu](https://github.com/Reonu) for providing the desk model and the animations for Link.
+- [Reonu](https://github.com/Reonu) for providing the desk model and the animations for Link as well as adding Linux building.
