@@ -6,6 +6,7 @@
 #include "gLinkHumanSkelGamingAnim.h"
 #include "gLinkHumanSkelSitting_on_pcAnim.h"
 
+void Player_StopHorizontalMovement(Player* this);
 void Player_Action_Idle(Player* this, PlayState* play);
 void Player_Anim_PlayOnce(PlayState*, Player*, PlayerAnimationHeader*);
 void Player_Anim_PlayLoop(PlayState*, Player*, PlayerAnimationHeader*);
@@ -140,6 +141,12 @@ void send_key_press_or_release(Input *input, int btn, int key) {
 }
 
 RECOMP_HOOK("Player_ProcessControlStick") void after_player_process_control_stick(PlayState* play, Player* this) {
+    Player* player = GET_PLAYER(play);
+    if (player != this) {
+        // Ignore this other player that seems to be passed to the function under some condition.
+        return;
+    }
+
     if (locked_in) {
         Input *input = CONTROLLER1(&play->state);
         if (CHECK_BTN_ALL(input->press.button, BTN_L)) {
@@ -180,6 +187,11 @@ RECOMP_HOOK("Player_ProcessControlStick") void after_player_process_control_stic
         }
     }
     else if (CHECK_BTN_ALL(CONTROLLER1(&play->state)->press.button, BTN_L)) {
+        if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) == 0) {
+            // Check if Link is touching the ground.
+            return;
+        }
+
         if (!s_DoomInitialized) {
             DoomDLL_Initialize();
             s_DoomInitialized = 1;
@@ -206,6 +218,7 @@ RECOMP_HOOK("Player_ProcessControlStick") void after_player_process_control_stic
         locking_in_eye_target.y += eye_offset.y;
         locking_in_eye_target.z += eye_offset.z * rot_cos - eye_offset.x * rot_sin;
 
+        Player_StopHorizontalMovement(this);
         Player_SetAction(play, this, Player_Action_LockedIn, 1);
         Player_Anim_PlayOnce(play, this, &gLinkHumanSkelSitting_on_pcAnim);
         locking_in = 21;
