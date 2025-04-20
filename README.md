@@ -1,4 +1,4 @@
-## Majora's Mask Recompiled DOOM Mod
+# Majora's Mask Recompiled DOOM Mod
 
 ## Disclaimer
 
@@ -6,7 +6,7 @@ This mod was very much made in jest and is mostly just intended as a proof of co
 
 Expect plenty of bugs, softlocks and other buggy interactions if you mess around with it.
 
-# What is this?
+## What is this?
 
 This mod uses a modified version [doomgeneric](https://github.com/ozkl/doomgeneric) to create a native library that outputs the screen's contents to a destination buffer instead of a display.
 
