@@ -12,6 +12,8 @@ This mod uses a modified version [doomgeneric](https://github.com/ozkl/doomgener
 
 The mod calls the exported functions from the native library to retrieve the game's next frame and displays it. It also passes the game's controller inputs directly to DOOM. You'll see the game inside a desktop PC that Link spawns in-game.
 
+![Gaming](/img/clock_tower.gif)
+
 Platforms other than Windows aren't supported at the moment but it shouldn't be too hard to add if somebody's willing to add them.
 
 ## How to play
