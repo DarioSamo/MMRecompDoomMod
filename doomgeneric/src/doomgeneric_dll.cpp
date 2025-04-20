@@ -7,13 +7,8 @@
 #include <string.h>
 #include <time.h>
 
-#ifdef _WIN32
-#include <windows.h>
-#define usleep(x) Sleep((x) / 1000)
-#else
 #include <unistd.h>
 #include <limits.h>
-#endif
 
 #define KEYQUEUE_SIZE 16
 #ifdef _WIN32
@@ -45,7 +40,7 @@ extern "C" {
     }
 
     void DG_SleepMs(uint32_t ms) {
-        usleep(ms * 1000);
+        
     }
 
     uint32_t DG_GetTicksMs() {
@@ -71,13 +66,13 @@ extern "C" {
         }
     }
 
-    uint32_t recomp_api_version = 1;
+    DLLEXPORT uint32_t recomp_api_version = 1;
 
     void DG_SetWindowTitle(const char *title) {
         // Does nothing.
     }
 
-    void DoomDLL_Initialize(uint8_t *rdram, recomp_context *ctx) {
+    DLLEXPORT void DoomDLL_Initialize(uint8_t *rdram, recomp_context *ctx) {
 #ifdef _WIN32
         if (!GetModuleFileNameA(NULL, s_WadPath, sizeof(s_WadPath))) {
             return;
@@ -107,17 +102,17 @@ extern "C" {
         doomgeneric_Create(sizeof(s_Argv) / sizeof(char *), (char **)(s_Argv));
     }
 
-    void DoomDLL_Tick(uint8_t *rdram, recomp_context *ctx) {
+    DLLEXPORT void DoomDLL_Tick(uint8_t *rdram, recomp_context *ctx) {
         doomgeneric_Tick();
     }
 
-    void DoomDLL_Input(uint8_t *rdram, recomp_context *ctx) {
+    DLLEXPORT void DoomDLL_Input(uint8_t *rdram, recomp_context *ctx) {
         unsigned int doomKey = _arg<0, unsigned int>(rdram, ctx);
         unsigned int pressed = _arg<1, unsigned int>(rdram, ctx);
         addKeyToQueue(pressed, doomKey);
     }
 
-    void DoomDLL_ScreenCopy(uint8_t *rdram, recomp_context *ctx) {
+    DLLEXPORT void DoomDLL_ScreenCopy(uint8_t *rdram, recomp_context *ctx) {
         uint8_t *dstScreenBuffer = (uint8_t *)(_arg<0, void *>(rdram, ctx));
         for (uint32_t y = 0; y < DOOMGENERIC_RESY; y++) {
             for (uint32_t x = 0; x < DOOMGENERIC_RESX; x++) {
@@ -130,11 +125,11 @@ extern "C" {
         }
     }
 
-    void DoomDLL_ScreenWidth(uint8_t *rdram, recomp_context *ctx) {
+    DLLEXPORT void DoomDLL_ScreenWidth(uint8_t *rdram, recomp_context *ctx) {
         _return(ctx, (unsigned int)(DOOMGENERIC_RESX));
     }
 
-    void DoomDLL_ScreenHeight(uint8_t *rdram, recomp_context *ctx) {
+    DLLEXPORT void DoomDLL_ScreenHeight(uint8_t *rdram, recomp_context *ctx) {
         _return(ctx, (unsigned int)(DOOMGENERIC_RESY));
     }
 };

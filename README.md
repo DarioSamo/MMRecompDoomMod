@@ -6,7 +6,7 @@ This mod was very much made in jest and is mostly just intended as a proof of co
 
 Expect plenty of bugs, softlocks and other buggy interactions if you mess around with it.
 
-Platforms other than Windows and Linux aren't supported at the moment but it shouldn't be too hard to add if somebody's willing to add them.
+There's no pre-made binary available for MacOS at the moment but adding support for it is welcome.
 
 ## What is this?
 
