@@ -1,0 +1,1 @@
+extern LinkAnimationHeader gLinkHumanSkelSitting_on_pcAnim;

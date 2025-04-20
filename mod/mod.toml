@@ -1,0 +1,57 @@
+# Config file for an example Majora's Mask: Recompiled mod.
+
+# Fields that end up in the mod's manifest.
+[manifest]
+
+# Unique ID of this mod. Pick something long enough that it'll never be the same as any other mod.
+# The name displayed in the mod management menu is separate from this so this doesn't need to be human readable.
+id = "mm_recomp_doom_mod"
+
+# Version of this mod.
+version = "1.0.0"
+
+# The name that will show up for this mod in the mod menu. This should be human readable.
+display_name = "Doom"
+
+# The description that will show up when this mod is displayed in the mod menu. This should be human readable.
+description =  "Doom in your Majora."
+
+# A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
+# to prevent it from being cut off due to the limited space.
+short_description = "Doom in your Majora."
+
+# Authors of this mod.
+authors = [ "Darío", "Reonu", "Wiseguy" ]
+
+# ID of the target recomp game.
+game_id = "mm"
+
+# Minimum version of the target recomp (e.g. Zelda 64: Recompiled) that this mod can run on.
+minimum_recomp_version = "1.2.0"
+
+# Dependency mods. Each entry is the mod's ID and then an optional minimum version of the dependency mod.
+dependencies = [
+# Example dependency:
+#    "modname:1.0.0"
+]
+
+# Native libraries (e.g. DLLs) and the functions they export.
+native_libraries = [
+    { name = "doomgeneric", funcs = [ "DoomDLL_Initialize", "DoomDLL_Tick", "DoomDLL_Input", "DoomDLL_ScreenCopy", "DoomDLL_ScreenWidth", "DoomDLL_ScreenHeight" ] }
+]
+
+# Inputs to the mod tool.
+[inputs]
+
+# Input elf file to generate a mod from.
+elf_path = "build/mod.elf"
+
+# Output mod filename.
+mod_filename = "mm_recomp_doom_mod"
+
+# Reference symbol files.
+func_reference_syms_file = "Zelda64RecompSyms/mm.us.rev1.syms.toml"
+data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml" ]
+
+# Additional files to include in the mod.
+additional_files = [ "thumb.dds" ]
