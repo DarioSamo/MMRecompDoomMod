@@ -11,14 +11,20 @@ id = "mm_recomp_doom_mod"
 version = "1.0.0"
 
 # The name that will show up for this mod in the mod menu. This should be human readable.
-display_name = "Doom"
+display_name = "DOOM"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
-description =  "Doom in your Majora."
+description =  """
+DOOM in your Majora.
+
+Remember to place your DOOM1.WAD in the mods folder for the mod to work!
+
+Press L + R during gameplay to start playing DOOM. Press it again to stop playing.
+"""
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
 # to prevent it from being cut off due to the limited space.
-short_description = "Doom in your Majora."
+short_description = "DOOM in your Majora."
 
 # Authors of this mod.
 authors = [ "Darío", "Reonu", "Wiseguy" ]

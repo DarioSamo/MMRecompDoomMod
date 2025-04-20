@@ -140,6 +140,13 @@ void send_key_press_or_release(Input *input, int btn, int key) {
     }
 }
 
+int check_button_combo(PlayState* play) {
+    Input *input = CONTROLLER1(&play->state);
+    return 
+        (CHECK_BTN_ALL(input->press.button, BTN_L) && CHECK_BTN_ALL(input->cur.button, BTN_R)) || 
+        (CHECK_BTN_ALL(input->cur.button, BTN_L) && CHECK_BTN_ALL(input->press.button, BTN_R));
+}
+
 RECOMP_HOOK("Player_ProcessControlStick") void after_player_process_control_stick(PlayState* play, Player* this) {
     Player* player = GET_PLAYER(play);
     if (player != this) {
@@ -148,14 +155,14 @@ RECOMP_HOOK("Player_ProcessControlStick") void after_player_process_control_stic
     }
 
     if (locked_in) {
-        Input *input = CONTROLLER1(&play->state);
-        if (CHECK_BTN_ALL(input->press.button, BTN_L)) {
+        if (check_button_combo(play)) {
             locked_in = 0;
             desk_visible = 0;
             Player_Anim_PlayOnce(play, this, &gLinkHumanSkelGamingAnim);
             Player_SetAction(play, this, Player_Action_Idle, 1);
         }
         else {
+            Input *input = CONTROLLER1(&play->state);
             int prev_x_key = stick_to_key(input->prev.stick_x, 0);
             int cur_x_key = stick_to_key(input->cur.stick_x, 0);
             int prev_y_key = stick_to_key(input->prev.stick_y, 1);
@@ -186,7 +193,7 @@ RECOMP_HOOK("Player_ProcessControlStick") void after_player_process_control_stic
             locked_in = 1;
         }
     }
-    else if (CHECK_BTN_ALL(CONTROLLER1(&play->state)->press.button, BTN_L)) {
+    else if (check_button_combo(play)) {
         if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) == 0) {
             // Check if Link is touching the ground.
             return;
