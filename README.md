@@ -6,15 +6,17 @@ This mod was very much made in jest and is mostly just intended as a proof of co
 
 Expect plenty of bugs, softlocks and other buggy interactions if you mess around with it.
 
+Platforms other than Windows aren't supported at the moment but it shouldn't be too hard to add if somebody's willing to add them.
+
 ## What is this?
 
 This mod uses a modified version [doomgeneric](https://github.com/ozkl/doomgeneric) to create a native library that outputs the screen's contents to a destination buffer instead of a display.
 
-The mod calls the exported functions from the native library to retrieve the game's next frame and displays it. It also passes the game's controller inputs directly to DOOM. You'll see the game inside a desktop PC that Link spawns in-game.
+The mod calls the exported functions from the native library to retrieve the game's next frame and displays it.
+
+The game is played inside a desktop PC placed in the game world itself.
 
 ![Gaming](/img/clock_tower.gif)
-
-Platforms other than Windows aren't supported at the moment but it shouldn't be too hard to add if somebody's willing to add them.
 
 ## How to play
 
