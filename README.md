@@ -28,3 +28,7 @@ Once you're in-game, you can just press L at any time and Link will spawn a desk
 
 Instructions on how to build each component of the mod can be found in each of the project's folders. You'll have to build both components separately and copy them together to the mods folder.
 
+## Special thanks
+
+- [Wiseguy](https://github.com/Mr-Wiseguy) for providing general code assistance and material tweaking.
+- [Reonu](https://github.com/Reonu) for providing the desk model and the animations for Link.
