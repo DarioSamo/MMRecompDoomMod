@@ -7,9 +7,9 @@ CXX_SRCS   := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS       := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(C_SRCS)) \
               $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(CXX_SRCS))
 
-CC  ?= clang
-CXX ?= clang++
-LD  ?= clang++
+CC  := clang
+CXX := clang++
+LD  := clang++
 
 CFLAGS    := -O2 -I$(INCLUDE)
 CXXFLAGS  := -O2 -I$(INCLUDE)
@@ -20,7 +20,7 @@ TARGET    := $(BUILD_DIR)/doomgeneric.dll
 all: $(TARGET)
 
 $(BUILD_DIR):
-	@mkdir -p $(BUILD_DIR)
+	@mkdir $(BUILD_DIR)
 
 $(TARGET): $(BUILD_DIR) $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $(OBJS)
