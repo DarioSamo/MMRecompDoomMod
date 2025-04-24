@@ -15,6 +15,7 @@ Play DOOM on a desktop PC placed within the game world itself. You can bring up 
 - Install the mod in *Zelda 64: Recompiled*.
 - Before running the game, **make sure you have a** `DOOM1.wad` **file in the mods folder**.
   - If you don't own DOOM, you can use the shareware version which is freely available online.
+  - You can find the mods folder by just pressing "Open Mods Folder" in the "Mods" tab in *Zelda 64: Recompiled*.
 - Run the game! Test it out by pressing `L + R` once you have control of Link.
 
 ## Special thanks
