@@ -15,7 +15,8 @@ s32 Player_SetAction(PlayState*, Player*, PlayerActionFunc, s32);
 RECOMP_IMPORT("*", void* recomp_alloc(unsigned long size));
 RECOMP_IMPORT("*", void recomp_free(void* memory));
 RECOMP_IMPORT("*", int recomp_printf(const char* fmt, ...));
-RECOMP_IMPORT(".", void DoomDLL_Initialize());
+RECOMP_IMPORT("*", unsigned char* recomp_get_mod_folder_path());
+RECOMP_IMPORT(".", void DoomDLL_Initialize(const unsigned char *modsPath));
 RECOMP_IMPORT(".", void DoomDLL_Tick());
 RECOMP_IMPORT(".", void DoomDLL_Input(unsigned int doomKey, unsigned int pressed));
 RECOMP_IMPORT(".", void DoomDLL_ScreenCopy(void *dstScreenBuffer));
@@ -200,7 +201,9 @@ RECOMP_HOOK("Player_ProcessControlStick") void after_player_process_control_stic
         }
 
         if (!s_DoomInitialized) {
-            DoomDLL_Initialize();
+            unsigned char* mods_path = recomp_get_mod_folder_path();
+            DoomDLL_Initialize(mods_path);
+            recomp_free(mods_path);
             s_DoomInitialized = 1;
         }
 

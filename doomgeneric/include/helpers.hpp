@@ -4,6 +4,7 @@
 #include "mod_recomp.h"
 
 #include <string>
+#include <iostream>
 #include <stdint.h>
 
 #define TO_PTR(type, var) ((type*)(&rdram[(uint64_t)var - 0xFFFFFFFF80000000]))
@@ -60,6 +61,27 @@ std::string _arg_string(uint8_t* rdram, recomp_context* ctx) {
     }
 
     std::string ret{};
+    ret.reserve(len + 1);
+
+    for (size_t i = 0; i < len; i++) {
+        ret += (char)MEM_B(str, i);
+    }
+
+    return ret;
+}
+
+template <int arg_index>
+std::u8string _arg_u8string(uint8_t* rdram, recomp_context* ctx) {
+    PTR(char) str = _arg<arg_index, PTR(char)>(rdram, ctx);
+
+    // Get the length of the byteswapped string.
+    size_t len = 0;
+    while (MEM_B(str, len) != 0x00) {
+        std::cout << MEM_B(str, len);
+        len++;
+    }
+
+    std::u8string ret{};
     ret.reserve(len + 1);
 
     for (size_t i = 0; i < len; i++) {

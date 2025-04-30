@@ -13,7 +13,7 @@ ifeq ($(OS),Windows_NT)
     TARGET   := $(BUILD_DIR)/doomgeneric.dll
     LDFLAGS  := -shared -luser32
     CFLAGS   := -O2 -I$(INCLUDE)
-    CXXFLAGS := -O2 -I$(INCLUDE)
+    CXXFLAGS := -O2 -std=c++20 -I$(INCLUDE)
     RM       := del /Q
     MKDIR    := mkdir
 else
@@ -21,7 +21,7 @@ else
     TARGET   := $(BUILD_DIR)/doomgeneric.so
     LDFLAGS  := -shared
     CFLAGS   := -O2 -fPIC -I$(INCLUDE)
-    CXXFLAGS := -O2 -fPIC -I$(INCLUDE)
+    CXXFLAGS := -O2 -std=c++20 -fPIC -I$(INCLUDE)
     RM       := rm -rf
     MKDIR    := mkdir -p
 endif

@@ -80,32 +80,8 @@ extern "C" {
     }
 
     DLLEXPORT void DoomDLL_Initialize(uint8_t *rdram, recomp_context *ctx) {
-#ifdef _WIN32
-        HMODULE hm = NULL;
-        GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)&DoomDLL_Initialize, &hm);
-        GetModuleFileNameA(hm, s_WadPath, sizeof(s_WadPath));
-#else
-        ssize_t len = readlink("/proc/self/exe", s_WadPath, sizeof(s_WadPath) - 1);
-        if (len == -1) {
-            return;
-        }
-        s_WadPath[len] = '\0';
-#endif
-
-        char *lastSlash = strrchr(s_WadPath, '/');
-#ifdef _WIN32
-        if (!lastSlash) {
-            lastSlash = strrchr(s_WadPath, '\\');
-        }
-#endif
-        if (lastSlash == nullptr) {
-            return;
-        }
-
-        lastSlash++;
-        *lastSlash = '\0';
-        strcat(s_WadPath, "DOOM1.WAD");
-
+        std::u8string modsPath = _arg_u8string<0>(rdram, ctx);
+        snprintf(s_WadPath, MAX_PATH_LENGTH, "%s/DOOM1.WAD", (const char *)(modsPath.c_str()));
         doomgeneric_Create(sizeof(s_Argv) / sizeof(char *), (char **)(s_Argv));
     }
 
